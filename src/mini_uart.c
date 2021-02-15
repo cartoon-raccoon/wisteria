@@ -4,7 +4,7 @@
 
 void uart_send (char c) {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG) & 0x20) 
+		if (get32(AUX_MU_LSR_REG) & 0x20) 
 			break;
 	}
 	put32(AUX_MU_IO_REG,c);
@@ -12,10 +12,10 @@ void uart_send (char c) {
 
 char uart_recv (void) {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x01) 
+		if (get32(AUX_MU_LSR_REG)&0x01) 
 			break;
 	}
-	return(get32(AUX_MU_IO_REG)&0xFF);
+	return (get32(AUX_MU_IO_REG)&0xFF);
 }
 
 void uart_send_string(char* str) {
@@ -48,5 +48,4 @@ void uart_init(void) {
 	put32(AUX_MU_BAUD_REG,270);             //Set baud rate to 115200
 
 	put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
-}
 }
